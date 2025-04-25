@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 
 use apply::Apply;
+use iced::window;
 
 use crate::{
     Core, Element,
@@ -36,14 +37,20 @@ pub fn responsive_menu_bar<'a, Message: Clone + 'static, A: menu::Action<Message
                 menu::bar(
                     trees
                         .into_iter()
-                        .map(|mt| {
-                            menu::Tree::<_>::with_children(
-                                menu::root(mt.0),
-                                menu::items(key_binds, mt.1),
-                            )
-                        })
+                        .map(
+                            |mt: (
+                                std::borrow::Cow<'_, str>,
+                                Vec<menu::Item<A, std::borrow::Cow<'_, str>>>,
+                            )| {
+                                menu::Tree::<_>::with_children(
+                                    Element::from(menu::root(mt.0)),
+                                    menu::items(key_binds, mt.1),
+                                )
+                            },
+                        )
                         .collect(),
-                ),
+                )
+                .window_id_maybe(core.main_window_id()),
                 crate::widget::Id::new(format!("menu_bar_expanded_{id}")),
             ),
             id,
@@ -66,7 +73,8 @@ pub fn responsive_menu_bar<'a, Message: Clone + 'static, A: menu::Action<Message
                             .map(|mt| menu::Item::Folder(mt.0, mt.1))
                             .collect(),
                     ),
-                )]),
+                )])
+                .window_id_maybe(core.main_window_id()),
                 crate::widget::Id::new(format!("menu_bar_collapsed_{id}")),
             ),
             id,

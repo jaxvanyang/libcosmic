@@ -168,8 +168,10 @@ impl cosmic::Application for App {
             Message::ToggleHide => {
                 self.hidden = !self.hidden;
             }
-            Message::Surface(_) => {
-                // unimplemented!()
+            Message::Surface(a) => {
+                return cosmic::task::message(cosmic::Action::Cosmic(
+                    cosmic::app::Action::Surface(a),
+                ));
             }
             Message::Hi => {
                 dbg!("hi");

@@ -345,7 +345,7 @@ impl<'a, Message: Clone + 'static> HeaderBar<'a, Message> {
                     .spacing(space_xxxs)
                     .align_y(iced::Alignment::Center)
                     .apply(widget::container)
-                    .center_x(Length::Fill)
+                    .center_x(Length::Shrink)
                     .into()
             } else if self.title.is_empty() {
                 widget::horizontal_space().into()

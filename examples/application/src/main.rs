@@ -289,18 +289,21 @@ impl cosmic::Application for App {
                 Message::Surface,
                 vec![
                     (
-                        "hiiiiiiiiiiiiiiiiiii 1".into(),
-                        vec![menu::Item::Button("hi 1".into(), None, Action::Hi)],
+                        "hi 1".into(),
+                        vec![
+                            menu::Item::Button("hi 1".into(), None, Action::Hi),
+                            menu::Item::Button("hi 1 2".into(), None, Action::Hi),
+                        ],
                     ),
                     (
-                        "hiiiiiiiiiiiiiiiiiii 2".into(),
+                        "hi 2".into(),
                         vec![
                             menu::Item::Button("hi 2".into(), None, Action::Hi),
                             menu::Item::Button("hi 22".into(), None, Action::Hi),
                         ],
                     ),
                     (
-                        "hiiiiiiiiiiiiiiiiiii 3".into(),
+                        "hi 3".into(),
                         vec![
                             menu::Item::Button("hi 3".into(), None, Action::Hi),
                             menu::Item::Button("hi 33".into(), None, Action::Hi),
